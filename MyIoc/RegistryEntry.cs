@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyIoc
+namespace MyIoc.Core
 {
     internal class RegistryEntry
     {

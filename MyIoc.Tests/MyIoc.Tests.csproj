@@ -52,9 +52,9 @@
     <Compile Include="TestDataStructures\SimpleWorker.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyIoc\MyIoc.csproj">
+    <ProjectReference Include="..\MyIoc\MyIoc.Core.csproj">
       <Project>{c5108db2-8911-4f9b-8cb9-5e8b2811b293}</Project>
-      <Name>MyIoc</Name>
+      <Name>MyIoc.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

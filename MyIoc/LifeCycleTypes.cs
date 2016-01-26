@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyIoc
+namespace MyIoc.Core
 {
     public enum LifeCycleTypes
     {

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using MyIoc.Tests.TestDataStructures;
+using MyIoc.Core;
 
 namespace MyIoc.Tests
 {
@@ -7,56 +8,56 @@ namespace MyIoc.Tests
     public class MyIocTest
     {
         [Test]
-        public void MyIocShouldRegisterADependency()
+        public void MyIocContainerShouldRegisterADependency()
         {
-            MyIoc ioc = new MyIoc();
+            MyIocContainer ioc = new MyIocContainer();
             ioc.Register<ISimpleService, SimpleWorker>();
         }
 
         [Test]
-        public void MyIocShouldResolveADependency()
+        public void MyIocContainerShouldResolveADependency()
         {
-            MyIoc ioc = new MyIoc();
+            MyIocContainer ioc = new MyIocContainer();
             ioc.Register<ISimpleService, SimpleWorker>();
-            var worker = ioc.Resolve<ISimpleService>();
+            var worker = ioc.Resolve(typeof(ISimpleService));
             Assert.AreEqual(typeof(SimpleWorker), worker.GetType());
         }
 
         [Test]
-        public void MyIocShouldNotRegisterTheSameInterfaceTwice()
+        public void MyIocContainerShouldNotRegisterTheSameInterfaceTwice()
         {
-            MyIoc ioc = new MyIoc();
+            MyIocContainer ioc = new MyIocContainer();
             ioc.Register<ISimpleService, SimpleWorker>();
             Assert.Throws<System.Exception>(() => ioc.Register<ISimpleService, SimpleWorker>());
         }
 
         [Test]
-        public void MyIocShouldReturnNewInstancesOfTransientTypes()
+        public void MyIocContainerShouldReturnNewInstancesOfTransientTypes()
         {
-            MyIoc ioc = new MyIoc();
+            MyIocContainer ioc = new MyIocContainer();
             ioc.Register<ISimpleService, SimpleWorker>();
-            var worker0 = ioc.Resolve<ISimpleService>();
-            var worker1 = ioc.Resolve<ISimpleService>();
+            var worker0 = ioc.Resolve(typeof(ISimpleService));
+            var worker1 = ioc.Resolve(typeof(ISimpleService));
             Assert.AreNotEqual(worker0, worker1);
         }
 
         [Test]
-        public void MyIocShouldReturnTheSameInstanceOfSingletonTypes()
+        public void MyIocContainerShouldReturnTheSameInstanceOfSingletonTypes()
         {
-            MyIoc ioc = new MyIoc();
+            MyIocContainer ioc = new MyIocContainer();
             ioc.Register<ISimpleService, SimpleWorker>(LifeCycleTypes.SINGLETON);
-            var worker0 = ioc.Resolve<ISimpleService>();
-            var worker1 = ioc.Resolve<ISimpleService>();
+            var worker0 = ioc.Resolve(typeof(ISimpleService));
+            var worker1 = ioc.Resolve(typeof(ISimpleService));
             Assert.AreEqual(worker0, worker1);
         }
 
         [Test]
-        public void MyIocShouldResolveTypesWithNestedDependencies()
+        public void MyIocContainerShouldResolveNestedDependencies()
         {
-            MyIoc ioc = new MyIoc();
+            MyIocContainer ioc = new MyIocContainer();
             ioc.Register<ISimpleService, SimpleWorker>();
             ioc.Register<IComplexService, ComplexWorker>();
-            var complexWorker = ioc.Resolve<IComplexService>();
+            var complexWorker = ioc.Resolve(typeof(IComplexService));
             Assert.AreEqual(typeof(ComplexWorker), complexWorker.GetType());
             Assert.AreEqual(typeof(SimpleWorker), (complexWorker as ComplexWorker).NestedSimpleService.GetType());
         }

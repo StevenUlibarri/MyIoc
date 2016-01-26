@@ -3,15 +3,15 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MyIoc
+namespace MyIoc.Core
 {
-    public class MyIoc
+    public class MyIocContainer
     {
         private ConcurrentDictionary<Type, RegistryEntry> Registry;
         private ConcurrentDictionary<Type, object> SingletonMap;
         private Dictionary<LifeCycleTypes, Func<Type, object>> LifeCycleMapping;
 
-        public MyIoc()
+        public MyIocContainer()
         {
             Registry = new ConcurrentDictionary<Type, RegistryEntry>();
             SingletonMap = new ConcurrentDictionary<Type, object>();
@@ -33,12 +33,7 @@ namespace MyIoc
             }
         }
 
-        public object Resolve<TInterface>()
-        {
-            return Resolve(typeof(TInterface));
-        }
-
-        private object Resolve(Type type)
+        public object Resolve(Type type, List<Type> resolvedTypes = null)
         {
             RegistryEntry entry;
             Registry.TryGetValue(type, out entry);

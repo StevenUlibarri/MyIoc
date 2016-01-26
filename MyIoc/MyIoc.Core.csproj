@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LifeCycleTypes.cs" />
-    <Compile Include="MyIoc.cs" />
+    <Compile Include="MyIocContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryEntry.cs" />
   </ItemGroup>
