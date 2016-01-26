@@ -7,8 +7,8 @@
     <ProjectGuid>{C5108DB2-8911-4F9B-8CB9-5E8B2811B293}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyIoc</RootNamespace>
-    <AssemblyName>MyIoc</AssemblyName>
+    <RootNamespace>MyIoc.Core</RootNamespace>
+    <AssemblyName>MyIoc.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
